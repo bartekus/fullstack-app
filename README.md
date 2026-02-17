@@ -37,9 +37,10 @@ encore app create uptime-example --example=ts/uptime
 
 ## Run app locally
 
-Before running your application, make sure you have Docker installed and running. Then run this command from your application's root folder:
+Before running your application, make sure you have Docker installed and running. Build the frontend, then run Encore:
 
 ```bash
+npm run build:frontend
 encore run
 ```
 

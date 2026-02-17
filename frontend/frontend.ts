@@ -1,17 +1,27 @@
 import { api } from "encore.dev/api";
-import next from "next";
+import { createRequestListener } from "@react-router/node";
 
-const app = next({
-  dev: true,
-  dir: "./frontend",
+// Your server build (Vite output). Exact import path depends on your build setup.
+// @ts-ignore
+const buildPromise = import("./build/server/index.js");
+
+const listenerPromise = (async () => {
+    const build = await buildPromise;
+    // createRequestListener expects a ServerBuild-based handler
+    return createRequestListener({ build });
+})();
+
+// Serve all files in the ./assets directory under the /public path prefix.
+export const assets = api.static({
+    expose: true,
+    path: "/assets/*path",
+    dir: "./build/client/assets",
 });
-const handle = app.getRequestHandler();
-const prepared = app.prepare();
 
-export const nextjs = api.raw(
-  { expose: true, path: "/!rest", method: "*" },
-  async (req, resp) => {
-    await prepared; // Wait for Next.js to start up.
-    return handle(req, resp);
-  },
+export const reactrouter = api.raw(
+    { expose: true, path: "/!rest", method: "*" },
+    async (req, res) => {
+        const listener = await listenerPromise;
+        return listener(req, res);
+    },
 );

@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
   resolve: {
     alias: {
-      "~encore": path.resolve(__dirname, "./encore.gen"),
+      "~encore": path.resolve(__dirname, "../encore.gen"),
     },
   },
 });
