@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# FullStack-App Feature Registry
+# Authoritative source of truth for FullStack-App capabilities and contracts.
+
+features:
+  # --- Core System ---
+  - id: FEATURE_NAME_AS_ID
+    title: "Some description"
+    governance: approved
+    implementation: todo
+    spec: "spec/core/tmp.md"
+    owner: core-team
+    group: core
+    tests: []
+    depends_on: []
