@@ -56,7 +56,7 @@ Or use the full start command (generates client, builds frontend, runs Encore):
 npm run start
 ```
 
-The app runs on **port 4002** by default. To use the Slack integration, set the Slack Webhook URL (see tutorial above):
+The app runs on **port 4000** by default. To use the Slack integration, set the Slack Webhook URL (see tutorial above):
 
 ```bash
 encore secret set --type local,dev,pr,prod SlackWebhookURL
@@ -66,38 +66,38 @@ encore secret set --type local,dev,pr,prod SlackWebhookURL
 
 - `BOOTSTRAP_ADMIN_EMAIL` – First signup with this email becomes admin (e.g. `admin@example.com`)
 - `ENCORE_API_BASE_URL` – Override API base URL when hostname is invalid (e.g. production)
-- `ENCORE_PUBLIC_HOST` – Override public host for request headers (default: `localhost:4002`)
+- `ENCORE_PUBLIC_HOST` – Override public host for request headers (default: `localhost:4000`)
 
 **Note:** Cron Jobs do not execute when running locally.
 
 ## View the frontend
 
-While `npm run encore` is running, head over to [http://localhost:4002/](http://localhost:4002/) to view the frontend. The landing page is at `/`; sign up or sign in to access the uptime monitoring dashboard at `/app`.
+While `npm run encore` is running, head over to [http://localhost:4000/](http://localhost:4000/) to view the frontend. The landing page is at `/`; sign up or sign in to access the uptime monitoring dashboard at `/app`.
 
 ## Using the API
 
-The API runs on port 4002 by default. Check if a given site is up (defaults to 'https://' if left out):
+The API runs on port 4000 by default. Check if a given site is up (defaults to 'https://' if left out):
 
 ```bash
-curl 'http://localhost:4002/ping/google.com'
+curl 'http://localhost:4000/ping/google.com'
 ```
 
 Add a site to be automatically pinged every 1 hour:
 
 ```bash
-curl 'http://localhost:4002/site' -d '{"url":"google.com"}'
+curl 'http://localhost:4000/site' -d '{"url":"google.com"}'
 ```
 
 Check all tracked sites immediately:
 
 ```bash
-curl -X POST 'http://localhost:4002/check-all'
+curl -X POST 'http://localhost:4000/check-all'
 ```
 
 Get the current status of all tracked sites:
 
 ```bash
-curl 'http://localhost:4002/status'
+curl 'http://localhost:4000/status'
 ```
 
 ## Local Development Dashboard

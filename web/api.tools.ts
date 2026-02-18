@@ -11,7 +11,7 @@ export const handlerPromise = (async () => {
   return createRequestHandler(build, process.env.NODE_ENV === "production" ? "production" : "development");
 })();
 
-export const DEFAULT_PUBLIC_HOST = process.env.ENCORE_PUBLIC_HOST ?? "localhost:4002";
+export const DEFAULT_PUBLIC_HOST = process.env.ENCORE_PUBLIC_HOST ?? "localhost:4000";
 
 export function getOrigin(req: any) {
   const proto = (req.headers["x-forwarded-proto"] as string | undefined) ?? (req.socket?.encrypted ? "https" : "http");

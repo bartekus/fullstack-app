@@ -1,6 +1,6 @@
 import Client from "./client";
 
-const DEFAULT_API_BASE = "http://localhost:4002";
+const DEFAULT_API_BASE = "http://localhost:4000";
 
 export function createEncoreClient(request: Request): Client {
   let baseUrl: string;

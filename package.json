@@ -7,7 +7,7 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
-    "encore": "BOOTSTRAP_ADMIN_EMAIL=admin@example.com encore run --port=4002 --debug",
+    "encore": "BOOTSTRAP_ADMIN_EMAIL=admin@example.com encore run --port=4000 --debug",
     "start": "npm run gen && npm run build:frontend && npm run encore",
     "gen": "encore gen client --output=./web/app/lib/client.ts --env=local",
     "build:frontend": "cd web && react-router build"

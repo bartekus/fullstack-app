@@ -58,4 +58,4 @@ Auth endpoints use explicit return types so the generated Encore client emits ty
 
 **Environment variables**:
 - `ENCORE_API_BASE_URL` - Override API base when hostname is "origin" or invalid
-- `ENCORE_PUBLIC_HOST` - Override public host for request header normalization (default: localhost:4002)
+- `ENCORE_PUBLIC_HOST` - Override public host for request header normalization (default: localhost:4000)

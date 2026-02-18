@@ -29,17 +29,17 @@ Align auth/admin APIs with the Encore client for typed responses, and fix reques
 - Fix createEncoreClient when hostname is "origin" (Encore internal host)
 - Add fixRequestHeaders in api.gateway.ts to normalize Origin and Host
 - Filter malformed headers (URLs as header names)
-- Normalize localhost/127.0.0.1 without port to include port 4002
+- Normalize localhost/127.0.0.1 without port to include port 4000
 
 ### Phase 4: React Router CSRF
 
-- Update allowedActionOrigins to host format (localhost:4002)
+- Update allowedActionOrigins to host format (localhost:4000)
 - Handle Chrome DevTools /.well-known/* requests
 
 ## Environment Variables
 
 - `ENCORE_API_BASE_URL` - Override API base for Encore client (e.g. production)
-- `ENCORE_PUBLIC_HOST` - Override public host for request header normalization (default: localhost:4002)
+- `ENCORE_PUBLIC_HOST` - Override public host for request header normalization (default: localhost:4000)
 
 ## Verification
 

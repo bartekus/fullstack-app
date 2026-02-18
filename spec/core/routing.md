@@ -47,7 +47,7 @@ When Encore forwards requests to the React Router frontend service, headers may 
 
 - Normalizes Origin and Host headers before passing to React Router
 - Builds a clean headers array; filters malformed headers (e.g. URLs as header names)
-- When Host is missing, "origin", or localhost/127.0.0.1 without port: uses `localhost:4002` (or `ENCORE_PUBLIC_HOST`)
+- When Host is missing, "origin", or localhost/127.0.0.1 without port: uses `localhost:4000` (or `ENCORE_PUBLIC_HOST`)
 
 ### Form Data (web/app/lib/form-data.server.ts)
 
@@ -56,8 +56,8 @@ When Encore forwards requests to the React Router frontend service, headers may 
 
 ### React Router CSRF (web/react-router.config.ts)
 
-- `allowedActionOrigins` uses host format (e.g. `localhost:4002`) per React Router 7.12+ requirements
+- `allowedActionOrigins` uses host format (e.g. `localhost:4000`) per React Router 7.12+ requirements
 
 ### createEncoreClient (web/app/lib/encore.server.ts)
 
-- When request URL hostname is "origin", falls back to `localhost:4002` or `ENCORE_API_BASE_URL`
+- When request URL hostname is "origin", falls back to `localhost:4000` or `ENCORE_API_BASE_URL`
