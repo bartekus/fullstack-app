@@ -51,3 +51,11 @@ First admin creation options:
 
 1. **Env var**: `BOOTSTRAP_ADMIN_EMAIL` - if signup email matches, set role to admin
 2. **CLI script**: `node scripts/make-admin.ts email@example.com` - one-time promotion
+
+## Encore Client Integration
+
+Auth endpoints use explicit return types so the generated Encore client emits typed responses. The frontend uses `createEncoreClient(request)` for request-scoped base URL and calls `client.auth.signin()`, `client.auth.signup()`, etc.
+
+**Environment variables**:
+- `ENCORE_API_BASE_URL` - Override API base when hostname is "origin" or invalid
+- `ENCORE_PUBLIC_HOST` - Override public host for request header normalization (default: localhost:4002)

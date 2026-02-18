@@ -1,12 +1,12 @@
-# Event-Driven Architecture Starter
+# FullStack App – Uptime Monitoring + SaaS Template
 
 This is an event-driven microservices application using Pub/Sub for asynchronous communication between services.
 
-The example in this starter is an Uptime Monitoring System that continuously monitors the uptime of a list of websites. 
+The example in this starter is an **Uptime Monitoring System** that continuously monitors the uptime of a list of websites. When it detects a website is down, it posts a Slack message notifying that the website is down, and another message when the website is back up again.
 
-When it detects a website is down, it posts a Slack message notifying that the website is down, and another message when the website is back up again.
+The app also includes a **SaaS template** with authentication, RBAC, admin panel, and audit logging. Public routes (landing, pricing, signin, signup), protected user app (`/app`), and admin panel (`/admin`) are available.
 
-It has a react frontend and you can try a demo version [here](https://uptime.encore.build/).
+It has a React frontend and you can try a demo version [here](https://uptime.encore.build/).
 
 ![Frontend](https://encore.dev/assets/tutorials/uptime/frontend.png)
 ![Architecture](https://encore.dev/assets/tutorials/uptime/encore-flow.png)
@@ -27,6 +27,12 @@ If you prefer, check out the [tutorial](https://encore.dev/docs/ts/tutorials/upt
 1. Install [Docker](https://docker.com)
 2. Start Docker
 
+## Project structure
+
+- **Public routes**: `/` (landing), `/pricing`, `/signin`, `/signup`, `/admin/signin`
+- **User app** (requires sign-in): `/app` (uptime dashboard), `/app/settings`
+- **Admin panel** (requires admin): `/admin`, `/admin/users`, `/admin/audit`
+
 ## Create app
 
 Create a local app from this template:
@@ -41,45 +47,62 @@ Before running your application, make sure you have Docker installed and running
 
 ```bash
 npm run build:frontend
-encore run
+npm run encore
 ```
 
-To use the Slack integration, set the Slack Webhook URL (see tutorial above):
+Or use the full start command (generates client, builds frontend, runs Encore):
+
+```bash
+npm run start
+```
+
+The app runs on **port 4002** by default. To use the Slack integration, set the Slack Webhook URL (see tutorial above):
+
 ```bash
 encore secret set --type local,dev,pr,prod SlackWebhookURL
 ```
+
+**Optional environment variables** (for Encore + React Router integration):
+
+- `BOOTSTRAP_ADMIN_EMAIL` – First signup with this email becomes admin (e.g. `admin@example.com`)
+- `ENCORE_API_BASE_URL` – Override API base URL when hostname is invalid (e.g. production)
+- `ENCORE_PUBLIC_HOST` – Override public host for request headers (default: `localhost:4002`)
 
 **Note:** Cron Jobs do not execute when running locally.
 
 ## View the frontend
 
-While `encore run` is running, head over to [http://localhost:4000/](http://localhost:4000/) to view the frontend for your uptime monitor.
+While `npm run encore` is running, head over to [http://localhost:4002/](http://localhost:4002/) to view the frontend. The landing page is at `/`; sign up or sign in to access the uptime monitoring dashboard at `/app`.
 
 ## Using the API
 
-Check if a given site is up (defaults to 'https://' if left out):
+The API runs on port 4002 by default. Check if a given site is up (defaults to 'https://' if left out):
+
 ```bash
-curl 'http://localhost:4000/ping/google.com'
+curl 'http://localhost:4002/ping/google.com'
 ```
 
 Add a site to be automatically pinged every 1 hour:
+
 ```bash
-curl 'http://localhost:4000/site' -d '{"url":"google.com"}'
+curl 'http://localhost:4002/site' -d '{"url":"google.com"}'
 ```
 
 Check all tracked sites immediately:
+
 ```bash
-curl -X POST 'http://localhost:4000/check-all'
+curl -X POST 'http://localhost:4002/check-all'
 ```
 
 Get the current status of all tracked sites:
+
 ```bash
-curl 'http://localhost:4000/status'
+curl 'http://localhost:4002/status'
 ```
 
 ## Local Development Dashboard
 
-While `encore run` is running, open [http://localhost:9400/](http://localhost:9400/) to access Encore's [local developer dashboard](https://encore.dev/docs/ts/observability/dev-dash).
+While `npm run encore` is running, open [http://localhost:9400/](http://localhost:9400/) to access Encore's [local developer dashboard](https://encore.dev/docs/ts/observability/dev-dash).
 
 Here you can see traces for all requests that you made while using the frontend, see your architecture diagram, and view API documentation in the Service Catalog.
 
@@ -122,6 +145,14 @@ Follow these steps to link your app to GitHub:
 5. Commit and push a change to GitHub to trigger a deploy.
 
 [Learn more in the docs](https://encore.dev/docs/platform/integrations/github)
+
+## Regenerating the API client
+
+After changing auth or admin API response types, regenerate the Encore client:
+
+```bash
+npm run gen
+```
 
 ## Testing
 

@@ -124,3 +124,24 @@ features:
     group: auth
     tests: []
     depends_on: [AUTH_USER]
+
+  # --- Encore + React Router Integration ---
+  - id: ENCORE_CLIENT_AUTH
+    title: "Typed Encore client for auth/admin - auth-api uses client, not raw fetch"
+    governance: approved
+    implementation: done
+    spec: "spec/core/auth.md"
+    owner: core-team
+    group: frontend
+    tests: []
+    depends_on: [AUTH_USER, AUTH_ADMIN]
+
+  - id: ENCORE_REQUEST_FORWARDING
+    title: "Encore request forwarding - fix Origin/Host, form data, CSRF"
+    governance: approved
+    implementation: done
+    spec: "spec/core/routing.md"
+    owner: core-team
+    group: frontend
+    tests: []
+    depends_on: [USER_APP, ADMIN_APP]
