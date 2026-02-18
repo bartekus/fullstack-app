@@ -1,31 +1,23 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Client, { monitor, site } from "~/lib/client";
-import type { Route } from "./+types/home";
+import Client, { monitor, site } from "../lib/client";
 import { type FC, useEffect, useState } from "react";
 import { DateTime } from "luxon";
 
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "Uptime Monitoring" },
-    { name: "description", content: "Monitor your websites' uptime" },
-  ];
-}
-
-export default function Home() {
+export default function Dashboard() {
   const [baseURL, setBaseURL] = useState("");
   useEffect(() => setBaseURL(window.location.origin), []);
 
   if (!baseURL) return null;
 
   return (
-    <div className="min-h-full container px-4 mx-auto my-16">
-      <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight dark:text-gray-100">
-        Uptime Monitoring
-      </h2>
-
-      <main className="pt-8 pb-16">
-        <SiteList client={new Client(baseURL)} />
-      </main>
+    <div>
+      <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">
+        User dashboard
+      </h3>
+      <p className="text-gray-600 dark:text-gray-400 mb-6">
+        Monitor your websites&apos; uptime below.
+      </p>
+      <SiteList client={new Client(baseURL)} />
     </div>
   );
 }
@@ -69,12 +61,12 @@ const SiteList: FC<{ client: Client }> = ({ client }) => {
     <>
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+          <h4 className="text-base font-semibold text-gray-900 dark:text-gray-100">
             Monitored Websites
-          </h1>
-          <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">
-            A list of all the websites being monitored, their current status,
-            and when they were last checked.
+          </h4>
+          <p className="mt-1 text-sm text-gray-700 dark:text-gray-300">
+            A list of all the websites being monitored, their current status, and
+            when they were last checked.
           </p>
         </div>
         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
@@ -137,7 +129,8 @@ const SiteList: FC<{ client: Client }> = ({ client }) => {
                             className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
                             onClick={() => doDelete.mutate(s)}
                           >
-                            Delete<span className="sr-only"> {s.url}</span>
+                            Delete
+                            <span className="sr-only"> {s.url}</span>
                           </button>
                         </td>
                       </tr>
@@ -204,7 +197,7 @@ const AddSiteForm: FC<{ client: Client }> = ({ client }) => {
         <div>
           <button
             type="submit"
-            className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm enabled:hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-75 dark:focus:ring-offset-gray-900"
+            className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm enabled:hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-75 dark:focus:ring-offset-gray-900"
             disabled={!validURL(url)}
           >
             Save

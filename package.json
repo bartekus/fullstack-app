@@ -7,6 +7,8 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
+    "encore": "BOOTSTRAP_ADMIN_EMAIL=admin@example.com encore run --port=4002 --debug",
+    "start": "npm run gen && npm run build:frontend && npm run encore",
     "gen": "encore gen client --output=./web/app/lib/client.ts --env=local",
     "build:frontend": "cd web && react-router build"
   },
@@ -17,6 +19,7 @@
     "@types/node": "^22",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
+    "drizzle-kit": "^0.31.9",
     "prettier": "^3.8.1",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2",
@@ -28,6 +31,8 @@
     "@react-router/node": "7.12.0",
     "@react-router/serve": "7.12.0",
     "@tanstack/react-query": "^5.31.0",
+    "argon2": "^0.44.0",
+    "drizzle-orm": "^0.45.1",
     "encore.dev": "^1.54.0",
     "isbot": "^5.1.31",
     "knex": "^3.0.1",
