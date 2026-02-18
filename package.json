@@ -7,8 +7,8 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
-    "gen": "encore gen client --output=./frontend/app/lib/client.ts --env=local",
-    "build:frontend": "cd frontend && react-router build"
+    "gen": "encore gen client --output=./web/app/lib/client.ts --env=local",
+    "build:frontend": "cd web && react-router build"
   },
   "devDependencies": {
     "@react-router/dev": "7.12.0",
