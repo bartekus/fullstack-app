@@ -35,7 +35,7 @@ jobs:
 
       # This uses the Encore CLI; that's why Encore install comes first.
       - name: Generate Encore client
-        run: npm run gen
+        run: /home/runner/.encore/bin/encore gen client --output=./web/app/lib/client.ts --env=local
 
       - name: Build frontend
         run: npm run build:frontend
